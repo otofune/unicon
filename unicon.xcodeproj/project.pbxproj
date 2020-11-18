@@ -12,7 +12,24 @@
 		EB1553D52564050900CC74D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D42564050900CC74D4 /* Assets.xcassets */; };
 		EB1553D82564050900CC74D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D72564050900CC74D4 /* Preview Assets.xcassets */; };
 		EB1553DB2564050900CC74D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D92564050900CC74D4 /* Main.storyboard */; };
+		EBE634462565D2780038A0FE /* MachOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE634452565D2780038A0FE /* MachOKit.framework */; };
+		EBE634472565D2780038A0FE /* MachOKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE634452565D2780038A0FE /* MachOKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EBE634492565D49E0038A0FE /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE634482565D49E0038A0FE /* MachO.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EBE634422565D1BD0038A0FE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EBE634472565D2780038A0FE /* MachOKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EB1553CD2564050800CC74D4 /* unicon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unicon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,6 +40,8 @@
 		EB1553DA2564050900CC74D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB1553DC2564050900CC74D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB1553DD2564050900CC74D4 /* unicon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = unicon.entitlements; sourceTree = "<group>"; };
+		EBE634452565D2780038A0FE /* MachOKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MachOKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBE634482565D49E0038A0FE /* MachO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,17 +49,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE634462565D2780038A0FE /* MachOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC7F89DB949E21DEDD1E6609 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBE634452565D2780038A0FE /* MachOKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EB1553C42564050800CC74D4 = {
 			isa = PBXGroup;
 			children = (
 				EB1553CF2564050800CC74D4 /* unicon */,
 				EB1553CE2564050800CC74D4 /* Products */,
+				BC7F89DB949E21DEDD1E6609 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				EB1553D02564050900CC74D4 /* AppDelegate.swift */,
+				EBE634482565D49E0038A0FE /* MachO.swift */,
 				EB1553D22564050900CC74D4 /* ContentView.swift */,
 				EB1553D42564050900CC74D4 /* Assets.xcassets */,
 				EB1553D92564050900CC74D4 /* Main.storyboard */,
@@ -84,6 +114,7 @@
 				EB1553C92564050800CC74D4 /* Sources */,
 				EB1553CA2564050800CC74D4 /* Frameworks */,
 				EB1553CB2564050800CC74D4 /* Resources */,
+				EBE634422565D1BD0038A0FE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -145,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1553D32564050900CC74D4 /* ContentView.swift in Sources */,
+				EBE634492565D49E0038A0FE /* MachO.swift in Sources */,
 				EB1553D12564050900CC74D4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
