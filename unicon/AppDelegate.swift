@@ -11,11 +11,19 @@ import SwiftUI
 // TODO: 自動で Int になっちゃうのか気になる (オートダウンキャストされるのか名前によって絞られるのか)
 typealias CPUType = cpu_type_t // NSBundleExecutableArchitecture と中の値は同じっぽいが
 
-protocol CPUArchitectureFromNumber {
-    func toStr() -> String
+enum CPUGroup {
+    case Unknown
+    case PPC
+    case Intel
+    case Apple
 }
 
-extension Int: CPUArchitectureFromNumber {
+protocol CPUArchitecture {
+    func toStr() -> String
+    func group() -> CPUGroup
+}
+
+extension Int: CPUArchitecture {
     func toStr() -> String {
         switch self {
         case NSBundleExecutableArchitecturePPC:
@@ -37,11 +45,32 @@ extension Int: CPUArchitectureFromNumber {
         default: return "Unknown"
         }
     }
+    func group() -> CPUGroup {
+        switch self {
+        case NSBundleExecutableArchitecturePPC:
+            fallthrough
+        case NSBundleExecutableArchitecturePPC64:
+            return .PPC
+        case NSBundleExecutableArchitectureI386:
+            fallthrough
+        case NSBundleExecutableArchitectureX86_64:
+            return .Intel
+        case let other:
+            if #available(OSX 11.0, *), other == NSBundleExecutableArchitectureARM64 {
+                return .Apple
+            }
+            fallthrough
+        default: return .Unknown
+        }
+    }
 }
 
-extension CPUType: CPUArchitectureFromNumber {
+extension CPUType: CPUArchitecture {
     func toStr() -> String {
-        (Int(self) as CPUArchitectureFromNumber).toStr()
+        (Int(self) as CPUArchitecture).toStr()
+    }
+    func group() -> CPUGroup {
+        (Int(self) as CPUArchitecture).group()
     }
 }
 
@@ -107,9 +136,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let menu = NSMenu()
 
-        // TODO: native に走ってるかチェックする
-        let appArch = (app.executableArchitecture as CPUArchitectureFromNumber).toStr()
-        menu.addMenuTitleOnly("\(name) runs on \(appArch)")
+        let machineArch = (try? MachOUtility.getMachineArchitecture()) ?? -1
+        let machineArchGroup = (machineArch as CPUArchitecture).group()
+        let appArchGroup = (app.executableArchitecture as CPUArchitecture).group()
+        let isNative = machineArchGroup == appArchGroup
+
+        let appArch = (app.executableArchitecture as CPUArchitecture).toStr()
+        menu.addMenuTitleOnly("\(name) runs \(isNative ? "natively " : "")on \(appArch)")
         menu.addSeparator()
 
         menu.addMenuTitleOnly("Identifier: \(identifier)")
@@ -120,7 +153,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 if archs.isEmpty {
                     menu.addMenuTitleOnly("Architectures: \(appArch) (only)")
                 } else {
-                    let arch_names = archs.map({ a in (a as CPUArchitectureFromNumber).toStr() })
+                    let arch_names = archs.map({ a in (a as CPUArchitecture).toStr() })
                     menu.addMenuTitleOnly("Architectures: \(arch_names.joined(separator: ", "))")
                 }
             }
@@ -129,6 +162,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addAppFooter()
         statusItem.menu = menu
         return true
-        
     }
 }
