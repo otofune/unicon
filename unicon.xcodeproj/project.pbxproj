@@ -15,6 +15,7 @@
 		EBE634462565D2780038A0FE /* MachOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE634452565D2780038A0FE /* MachOKit.framework */; };
 		EBE634472565D2780038A0FE /* MachOKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE634452565D2780038A0FE /* MachOKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EBE634492565D49E0038A0FE /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE634482565D49E0038A0FE /* MachO.swift */; };
+		EBE6344D25688D150038A0FE /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE6344C25688D150038A0FE /* CPU.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,7 @@
 		EB1553DD2564050900CC74D4 /* unicon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = unicon.entitlements; sourceTree = "<group>"; };
 		EBE634452565D2780038A0FE /* MachOKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MachOKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE634482565D49E0038A0FE /* MachO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachO.swift; sourceTree = "<group>"; };
+		EBE6344C25688D150038A0FE /* CPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				EB1553DC2564050900CC74D4 /* Info.plist */,
 				EB1553DD2564050900CC74D4 /* unicon.entitlements */,
 				EB1553D62564050900CC74D4 /* Preview Content */,
+				EBE6344C25688D150038A0FE /* CPU.swift */,
 			);
 			path = unicon;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE6344D25688D150038A0FE /* CPU.swift in Sources */,
 				EB1553D32564050900CC74D4 /* ContentView.swift in Sources */,
 				EBE634492565D49E0038A0FE /* MachO.swift in Sources */,
 				EB1553D12564050900CC74D4 /* AppDelegate.swift in Sources */,

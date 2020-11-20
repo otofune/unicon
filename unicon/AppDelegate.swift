@@ -8,75 +8,12 @@
 import Cocoa
 import SwiftUI
 
-// TODO: 自動で Int になっちゃうのか気になる (オートダウンキャストされるのか名前によって絞られるのか)
-typealias CPUType = cpu_type_t // NSBundleExecutableArchitecture と中の値は同じっぽいが
-
-enum CPUGroup {
-    case Unknown
-    case PPC
-    case Intel
-    case Apple
-}
-
-protocol CPUArchitecture {
-    func toStr() -> String
-    func group() -> CPUGroup
-}
-
-extension Int: CPUArchitecture {
-    func toStr() -> String {
-        switch self {
-        case NSBundleExecutableArchitecturePPC:
-            return "ppc"
-        case NSBundleExecutableArchitecturePPC64:
-            return "ppc64"
-        case NSBundleExecutableArchitectureI386:
-            return "i386"
-        case NSBundleExecutableArchitectureX86_64:
-            return "x86_64"
-        case let other:
-            if #available(OSX 11.0, *), other == NSBundleExecutableArchitectureARM64 {
-                return "arm64"
-            }
-            if other == Int(CPU_TYPE_ARM64) {
-                return "arm64"
-            }
-            fallthrough
-        default: return "Unknown"
-        }
-    }
-    func group() -> CPUGroup {
-        switch self {
-        case NSBundleExecutableArchitecturePPC:
-            fallthrough
-        case NSBundleExecutableArchitecturePPC64:
-            return .PPC
-        case NSBundleExecutableArchitectureI386:
-            fallthrough
-        case NSBundleExecutableArchitectureX86_64:
-            return .Intel
-        case let other:
-            if #available(OSX 11.0, *), other == NSBundleExecutableArchitectureARM64 {
-                return .Apple
-            }
-            fallthrough
-        default: return .Unknown
-        }
-    }
-}
-
-extension CPUType: CPUArchitecture {
-    func toStr() -> String {
-        (Int(self) as CPUArchitecture).toStr()
-    }
-    func group() -> CPUGroup {
-        (Int(self) as CPUArchitecture).group()
-    }
-}
-
 extension NSMenu {
-    func addMenuTitleOnly(_ title: String) {
-        self.addItem(NSMenuItem(title: title, action: nil, keyEquivalent: ""))
+    @discardableResult
+    func addMenuTitleOnly(_ title: String) -> NSMenuItem {
+        let menu = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+        self.addItem(menu)
+        return menu
     }
     func addSeparator() {
         self.addItem(NSMenuItem.separator())
@@ -93,15 +30,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     var observer: NSKeyValueObservation!
 
-    let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
+    // 仮置きで length を与えるが、あとで書き替える
+    let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.variableLength)
+
+    func setStatusItemText(_ upper: String, _ lower: String) {
+        let button = statusItem.button!
+
+        let font = NSFont.systemFont(ofSize: 9.5) // てきとう
+        
+        let p = NSMutableParagraphStyle()
+        p.alignment = .left
+        let title = NSMutableAttributedString()
+        title.append(NSAttributedString(string: upper + "\n", attributes: [ .font: font, .paragraphStyle: p ]))
+        title.append(NSAttributedString(string: lower, attributes: [ .font: font, .paragraphStyle: p ]))
+
+        button.attributedTitle = title
+    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-
         // 起動直後は無視する
-        let menu = NSMenu()
-        menu.addMenuTitleOnly("Switch active app…")
-        menu.addAppFooter()
-        statusItem.menu = menu
+        // TODO: もう面倒なので消したけど治安が悪いのでアイコンがついたタイミングで直す
+        statusItem.isVisible = false
 
         // TODO: changeHandler を selector で渡したほうがいいというアドバイスを受けたが、やり方が不明
         // selector のほうがいいのはおそらくメモリリークしないから (self を NSWorkspace に強参照されたくない)
@@ -128,33 +77,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addAppFooter()
         statusItem.menu = menu
     }
-    
+
     func _applyNSRunningApplicationChange(_ app: NSRunningApplication) -> Bool {
         // TODO: 自分だったら更新したくない (そもそも active にならない気もするが)
         guard let identifier = app.bundleIdentifier else { return false }
         guard let name = app.localizedName else { return false }
 
+        statusItem.isVisible = true
+
         let menu = NSMenu()
 
-        let machineArch = (try? MachOUtility.getMachineArchitecture()) ?? -1
-        let machineArchGroup = (machineArch as CPUArchitecture).group()
-        let appArchGroup = (app.executableArchitecture as CPUArchitecture).group()
-        let isNative = machineArchGroup == appArchGroup
+        let machineArch = (try? SysctlUtility.getMachineArchitecture()) ?? -1
+        let isNative = (machineArch as CPUArchitecture).isSameGroup(app.executableArchitecture)
+        
+        setStatusItemText(name, isNative ? "Native" : "Rosetta 2")
 
         let appArch = (app.executableArchitecture as CPUArchitecture).toStr()
-        menu.addMenuTitleOnly("\(name) runs \(isNative ? "natively " : "")on \(appArch)")
+        let appMenu = menu.addMenuTitleOnly("\(name) runs \(isNative ? "natively" : "with Rosetta 2")")
+        let appSubMenu = NSMenu()
+        appMenu.submenu = appSubMenu
+        appSubMenu.addMenuTitleOnly("Identifier:")
+        appSubMenu.addMenuTitleOnly("\t\(identifier)")
         menu.addSeparator()
 
-        menu.addMenuTitleOnly("Identifier: \(identifier)")
-
-        // support architectures
+        // list supported architectures
         if let p = app.executableURL {
             if let archs = try? MachOUtility.supportCPUTypes(path: p) {
                 if archs.isEmpty {
-                    menu.addMenuTitleOnly("Architectures: \(appArch) (only)")
+                    appSubMenu.addMenuTitleOnly("Architectures supported:")
+                    appSubMenu.addMenuTitleOnly("\t\(appArch)")
                 } else {
+                    appSubMenu.addMenuTitleOnly("Architectures supported:")
                     let arch_names = archs.map({ a in (a as CPUArchitecture).toStr() })
-                    menu.addMenuTitleOnly("Architectures: \(arch_names.joined(separator: ", "))")
+                    appSubMenu.addMenuTitleOnly("\t\(arch_names.joined(separator: ", "))")
                 }
             }
         }
