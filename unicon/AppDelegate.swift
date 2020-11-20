@@ -30,7 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     var observer: NSKeyValueObservation!
 
-    // 仮置きで length を与えるが、あとで書き替える
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.variableLength)
 
     func setStatusItemText(_ upper: String, _ lower: String) {
