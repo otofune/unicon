@@ -6,7 +6,6 @@
 //
 
 import Cocoa
-import SwiftUI
 
 extension NSMenu {
     @discardableResult
@@ -31,24 +30,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var observer: NSKeyValueObservation!
 
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.variableLength)
+    let textField = NSTextField(labelWithString: "unicon")
 
     func setStatusItemText(_ upper: String, _ lower: String) {
-        let button = statusItem.button!
-
-        let font = NSFont.systemFont(ofSize: 9.5) // てきとう
-        
+        let font = NSFont.systemFont(ofSize: 9)
         let p = NSMutableParagraphStyle()
         p.alignment = .left
         let title = NSMutableAttributedString()
         title.append(NSAttributedString(string: upper + "\n", attributes: [ .font: font, .paragraphStyle: p ]))
         title.append(NSAttributedString(string: lower, attributes: [ .font: font, .paragraphStyle: p ]))
-
-        button.attributedTitle = title
+        textField.attributedStringValue = title
+        textField.sizeToFit()
+        statusItem.button!.frame = CGRect(x: 0, y: 0, width: textField.frame.width, height: statusItem.button!.frame.height)
+        statusItem.isVisible = true
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // 起動直後は無視する
-        // TODO: もう面倒なので消したけど治安が悪いのでアイコンがついたタイミングで直す
+        textField.frame = CGRect(x: 0, y: 0, width: statusItem.button!.frame.width, height: statusItem.button!.frame.height)
+        textField.lineBreakMode = .byTruncatingTail
+        textField.isEditable = false
+        let parent = statusItem.button!
+        parent.addSubview(textField)
         statusItem.isVisible = false
 
         // TODO: changeHandler を selector で渡したほうがいいというアドバイスを受けたが、やり方が不明
@@ -86,13 +88,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let menu = NSMenu()
 
-        let machineArch = (try? SysctlUtility.getMachineArchitecture()) ?? -1
-        let isNative = (machineArch as CPUArchitecture).isSameGroup(app.executableArchitecture)
-        
-        setStatusItemText(name, isNative ? "Native" : "Rosetta 2")
+        setStatusItemText(name, (app.executableArchitecture as CPUArchitecture).toStr())
 
         let appArch = (app.executableArchitecture as CPUArchitecture).toStr()
-        let appMenu = menu.addMenuTitleOnly("\(name) runs \(isNative ? "natively" : "with Rosetta 2")")
+        let appMenu = menu.addMenuTitleOnly("\(name) runs with \(appArch)")
         let appSubMenu = NSMenu()
         appMenu.submenu = appSubMenu
         appSubMenu.addMenuTitleOnly("Identifier:")
