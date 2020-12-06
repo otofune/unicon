@@ -46,15 +46,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        statusItem.isVisible = false
+        // 縦幅を合わせる（本当にこれでいいのか？）
         textField.frame = CGRect(x: 0, y: 0, width: statusItem.button!.frame.width, height: statusItem.button!.frame.height)
         textField.lineBreakMode = .byTruncatingTail
-        textField.isEditable = false
         let parent = statusItem.button!
         parent.addSubview(textField)
-        statusItem.isVisible = false
 
         // TODO: changeHandler を selector で渡したほうがいいというアドバイスを受けたが、やり方が不明
         // selector のほうがいいのはおそらくメモリリークしないから (self を NSWorkspace に強参照されたくない)
+        // この場合だと問題ないだろうけど（アプリのライフサイクルと完全に一致しているため）覚えておきたい
         // NSObject に生えてる observe じゃなくて NSKeyValueObserving のほう使えばいいのか?
         observer = NSWorkspace.shared.observe(\.frontmostApplication, options: [.new], changeHandler: self.onFrontmostApplicationChanged)
 
