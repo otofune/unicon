@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let textField = NSTextField(labelWithString: "unicon")
 
     func setStatusItemText(_ upper: String, _ lower: String) {
-        let font = NSFont.systemFont(ofSize: 9)
+        let font = NSFont.systemFont(ofSize: 9) // max height of system bar is 22 px
         let p = NSMutableParagraphStyle()
         p.alignment = .left
         let title = NSMutableAttributedString()
@@ -41,13 +41,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         title.append(NSAttributedString(string: lower, attributes: [ .font: font, .paragraphStyle: p ]))
         textField.attributedStringValue = title
         textField.sizeToFit()
+        // FIXME: Use native StatusItem sizing
+        // Big Sur introduce more padding for menu bar items.
+        // But NSStatusItem.sizeToFit() doesn't care about subview's size and calculates width and height as 0.
+        // So I added .frame manually
+        let padding: CGFloat = 8
+        textField.frame = CGRect(x: padding, y: 0, width: textField.frame.width+padding*2, height: textField.frame.height)
         statusItem.button!.frame = CGRect(x: 0, y: 0, width: textField.frame.width, height: statusItem.button!.frame.height)
+
         statusItem.isVisible = true
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusItem.isVisible = false
-        // 縦幅を合わせる（本当にこれでいいのか？）
+        // TODO: is there better way?
         textField.frame = CGRect(x: 0, y: 0, width: statusItem.button!.frame.width, height: statusItem.button!.frame.height)
         textField.lineBreakMode = .byTruncatingTail
         let parent = statusItem.button!
@@ -60,10 +67,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         observer = NSWorkspace.shared.observe(\.frontmostApplication, options: [.new], changeHandler: self.onFrontmostApplicationChanged)
 
         NSApp.setActivationPolicy(NSApplication.ActivationPolicy.accessory)
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
     }
 
     func onFrontmostApplicationChanged(model: NSWorkspace, value: NSKeyValueObservedChange<NSRunningApplication?>) {
@@ -111,6 +114,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     appSubMenu.addMenuTitleOnly("\t\(arch_names.joined(separator: ", "))")
                 }
             } catch {
+                // this will be happened normally when no permission to read executableURL
                 print(error)
             }
         }

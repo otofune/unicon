@@ -8,7 +8,7 @@
 import Foundation
 
 extension Data {
-    /// UNSAFE; Read binary as given type forcely.
+    /// Read binary as given type forcibly.
     /// I cared about value types only, eg Integer or struct or etc...
     /// Also I didn't care about alignment, I treated binary as aligned.
     /// Because of this, this method may returns invalid value.
@@ -35,10 +35,6 @@ extension Data {
     }
 }
 
-func print0x<I: Numeric>(_ i: I) {
-    print(String(format: "%02x", i as! CVarArg))
-}
-
 extension FixedWidthInteger {
     func swap(_ r: Bool) -> Self {
         return r ? self.byteSwapped : self
@@ -47,7 +43,8 @@ extension FixedWidthInteger {
 
 class MachOUtility {
     static func supportCPUTypes(path: URL) throws -> Array<CPUArchitecture> {
-        // ファイルを見る権限が足りないと throw (ex: dmg を開いてそのままアプリを実行する)
+        // throw when no permission to read file
+        // eg: execute .app directly from mounted dmg file
         var data = try Data(contentsOf: path)
         guard let fat_magic: UInt32 = data.popFirstAs() else { throw NSError(domain: "[unreachable] missing header (file too short)", code: -1, userInfo: nil) }
 
