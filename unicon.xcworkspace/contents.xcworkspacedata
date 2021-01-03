@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Carthage/Checkouts/MachO-Kit/MachOKit.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:unicon.xcodeproj">
    </FileRef>
 </Workspace>

@@ -12,25 +12,9 @@
 		EB1553D52564050900CC74D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D42564050900CC74D4 /* Assets.xcassets */; };
 		EB1553D82564050900CC74D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D72564050900CC74D4 /* Preview Assets.xcassets */; };
 		EB1553DB2564050900CC74D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D92564050900CC74D4 /* Main.storyboard */; };
-		EBE634462565D2780038A0FE /* MachOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBE634452565D2780038A0FE /* MachOKit.framework */; };
-		EBE634472565D2780038A0FE /* MachOKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EBE634452565D2780038A0FE /* MachOKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EBE634492565D49E0038A0FE /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE634482565D49E0038A0FE /* MachO.swift */; };
 		EBE6344D25688D150038A0FE /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE6344C25688D150038A0FE /* CPU.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		EBE634422565D1BD0038A0FE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				EBE634472565D2780038A0FE /* MachOKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EB1553CD2564050800CC74D4 /* unicon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unicon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,7 +25,6 @@
 		EB1553DA2564050900CC74D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB1553DC2564050900CC74D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB1553DD2564050900CC74D4 /* unicon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = unicon.entitlements; sourceTree = "<group>"; };
-		EBE634452565D2780038A0FE /* MachOKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MachOKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBE634482565D49E0038A0FE /* MachO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachO.swift; sourceTree = "<group>"; };
 		EBE6344C25688D150038A0FE /* CPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,7 +34,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBE634462565D2780038A0FE /* MachOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +43,6 @@
 		BC7F89DB949E21DEDD1E6609 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EBE634452565D2780038A0FE /* MachOKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,7 +98,6 @@
 				EB1553C92564050800CC74D4 /* Sources */,
 				EB1553CA2564050800CC74D4 /* Frameworks */,
 				EB1553CB2564050800CC74D4 /* Resources */,
-				EBE634422565D1BD0038A0FE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,6 +183,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -236,6 +217,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -250,10 +232,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -264,6 +246,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -297,6 +280,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -305,9 +289,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -317,21 +302,27 @@
 		EB1553E12564050900CC74D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_ENTITLEMENTS = unicon/unicon.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"unicon/Preview Content\"";
 				DEVELOPMENT_TEAM = 5TVGRA297L;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = unicon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 0.1;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.otofune.apps.unicon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -341,21 +332,27 @@
 		EB1553E22564050900CC74D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CODE_SIGN_ENTITLEMENTS = unicon/unicon.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"unicon/Preview Content\"";
 				DEVELOPMENT_TEAM = 5TVGRA297L;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = unicon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 0.1;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.otofune.apps.unicon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
