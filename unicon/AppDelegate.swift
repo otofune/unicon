@@ -81,7 +81,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func _applyNSRunningApplicationChange(_ app: NSRunningApplication) -> Bool {
-        // TODO: 自分だったら更新したくない (そもそも active にならない気もするが)
         guard let identifier = app.bundleIdentifier else { return false }
         guard let name = app.localizedName else { return false }
 
@@ -101,15 +100,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // list supported architectures
         if let p = app.executableURL {
-            if let archs = try? MachOUtility.supportCPUTypes(path: p) {
+            do {
+                let archs = try MachOUtility.supportCPUTypes(path: p)
                 if archs.isEmpty {
                     appSubMenu.addMenuTitleOnly("Architectures supported:")
                     appSubMenu.addMenuTitleOnly("\t\(appArch)")
                 } else {
                     appSubMenu.addMenuTitleOnly("Architectures supported:")
-                    let arch_names = archs.map({ a in (a as CPUArchitecture).toStr() })
+                    let arch_names = archs.map({ $0.toStr() })
                     appSubMenu.addMenuTitleOnly("\t\(arch_names.joined(separator: ", "))")
                 }
+            } catch {
+                print(error)
             }
         }
 

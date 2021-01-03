@@ -7,9 +7,6 @@
 
 import Foundation
 
-// TODO: 自動で Int になっちゃうのか気になる (オートダウンキャストされるのか名前によって絞られるのか -> type alias は識別されないらしい)
-typealias CPUType = cpu_type_t // NSBundleExecutableArchitecture と中の値は同じっぽいが
-
 enum CPUGroup {
     case Unknown
     case PPC
@@ -73,7 +70,7 @@ extension Int: CPUArchitecture {
     }
 }
 
-extension CPUType: CPUArchitecture {
+extension cpu_type_t: CPUArchitecture {
     func toStr() -> String {
         (Int(self) as CPUArchitecture).toStr()
     }
@@ -86,8 +83,8 @@ extension CPUType: CPUArchitecture {
 }
 
 class SysctlUtility {
-    static func getMachineArchitecture() throws -> CPUType {
-        var type = CPUType(0)
+    static func getMachineArchitecture() throws -> cpu_type_t {
+        var type = cpu_type_t(0)
         var size = MemoryLayout.size(ofValue: type)
         // https://github.com/apple/darwin-xnu/blob/master/bsd/sys/sysctl.h
         let result = sysctlbyname("hw.cputype", &type, &size, nil, 0);
