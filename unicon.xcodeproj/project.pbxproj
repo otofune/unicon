@@ -11,6 +11,7 @@
 		EB1553D52564050900CC74D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D42564050900CC74D4 /* Assets.xcassets */; };
 		EB1553D82564050900CC74D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D72564050900CC74D4 /* Preview Assets.xcassets */; };
 		EB1553DB2564050900CC74D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D92564050900CC74D4 /* Main.storyboard */; };
+		EB35564D25A255D60054BD06 /* DataExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB35564C25A255D60054BD06 /* DataExt.swift */; };
 		EBE634492565D49E0038A0FE /* MachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE634482565D49E0038A0FE /* MachO.swift */; };
 		EBE6344D25688D150038A0FE /* CPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE6344C25688D150038A0FE /* CPU.swift */; };
 /* End PBXBuildFile section */
@@ -23,6 +24,7 @@
 		EB1553DA2564050900CC74D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB1553DC2564050900CC74D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB1553DD2564050900CC74D4 /* unicon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = unicon.entitlements; sourceTree = "<group>"; };
+		EB35564C25A255D60054BD06 /* DataExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExt.swift; sourceTree = "<group>"; };
 		EBE634482565D49E0038A0FE /* MachO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachO.swift; sourceTree = "<group>"; };
 		EBE6344C25688D150038A0FE /* CPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPU.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				EB1553DD2564050900CC74D4 /* unicon.entitlements */,
 				EB1553D62564050900CC74D4 /* Preview Content */,
 				EBE6344C25688D150038A0FE /* CPU.swift */,
+				EB35564C25A255D60054BD06 /* DataExt.swift */,
 			);
 			path = unicon;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				EBE6344D25688D150038A0FE /* CPU.swift in Sources */,
 				EBE634492565D49E0038A0FE /* MachO.swift in Sources */,
 				EB1553D12564050900CC74D4 /* AppDelegate.swift in Sources */,
+				EB35564D25A255D60054BD06 /* DataExt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,11 +299,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"unicon/Preview Content\"";
 				DEVELOPMENT_TEAM = 5TVGRA297L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = unicon/Info.plist;
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = net.otofune.apps.unicon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -315,11 +320,12 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"unicon/Preview Content\"";
 				DEVELOPMENT_TEAM = 5TVGRA297L;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = unicon/Info.plist;
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = net.otofune.apps.unicon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

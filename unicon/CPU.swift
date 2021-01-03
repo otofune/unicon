@@ -3,6 +3,7 @@
 //  unicon
 //
 //  Created by otofune on 2020/11/21.
+//  Copyright © 2020 otofune. All rights reserved.
 //
 
 import Foundation
