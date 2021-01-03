@@ -2,7 +2,7 @@
 //  CPU.swift
 //  unicon
 //
-//  Created by owner on 2020/11/21.
+//  Created by otofune on 2020/11/21.
 //
 
 import Foundation

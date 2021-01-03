@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  unicon
 //
-//  Created by owner on 2020/11/17.
+//  Created by otofune on 2020/11/17.
 //
 
 import SwiftUI

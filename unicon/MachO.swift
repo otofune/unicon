@@ -2,7 +2,7 @@
 //  MachO.swift
 //  unicon
 //
-//  Created by owner on 2020/11/19.
+//  Created by otofune on 2020/11/19.
 //
 
 import Foundation

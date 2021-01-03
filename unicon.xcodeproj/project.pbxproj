@@ -116,6 +116,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1220;
+				ORGANIZATIONNAME = otofune;
 				TargetAttributes = {
 					EB1553CC2564050800CC74D4 = {
 						CreatedOnToolsVersion = 12.2;
