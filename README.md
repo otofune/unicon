@@ -14,11 +14,11 @@ How to install
 ---
 
 1. Download app archive from [Latest release](https://github.com/otofune/unicon/releases/latest)
-2. Open dmg and copy unicon.app to /Applications
-3. (Optional) Add to Login Items to start the app automatically when you log in. See https://support.apple.com/guide/mac-help/mtusr003/mac
+1. Open dmg and copy `unicon.app` to /Applications
+1. (Optional) Add to Login Items to start the app automatically when you log in. See https://support.apple.com/guide/mac-help/mtusr003/mac
 
 Of course, you can build it by yourself.
-Please open unicon.xcworkspace with Xcode.
+Please open `unicon.xcworkspace` with Xcode.
 
 This project doesn't use any external dependencies at now, so you can build this project soon after opening.
 
@@ -42,11 +42,11 @@ For example executables of Steam games and iOS apps installed by .ipa are saved 
 LICENSE
 ---
 
-MIT, See [LICENSE](./LICENSE)
+MIT, See [`LICENSE`](./LICENSE)
 
 LICENSE (AppIcon)
 ---
 
 (c) みふねたかし (いらすとや)
 
-See [unicon/Assets.xcassets/AppIcon.appiconset/LICENSE](./unicon/Assets.xcassets/AppIcon.appiconset/LICENSE)
+See [`unicon/Assets.xcassets/AppIcon.appiconset/LICENSE`](./unicon/Assets.xcassets/AppIcon.appiconset/LICENSE)

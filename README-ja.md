@@ -9,13 +9,12 @@
 
 ## インストールするには
 
-
 1. [Latest release](https://github.com/otofune/unicon/releases/latest) からアーカイブをダウンロードする
-2. dmg をマウントして unicon.app を /Applications にコピーする
-4. (Optional) 自動でアプリを起動するために、ログイン項目に追加する。詳しくは https://support.apple.com/guide/mac-help/mtusr003/mac を参照
+1. dmg をマウントして `unicon.app` を /Applications にコピーする
+1. (Optional) 自動でアプリを起動するために、ログイン項目に追加する。詳しくは https://support.apple.com/guide/mac-help/mtusr003/mac を参照
 
 もちろんビルドすることもできます。
-unicon.xcworkspace を Xcode で開いてください。
+`unicon.xcworkspace` を Xcode で開いてください。
 
 現時点では外部のライブラリなどに依存していないため、開いたらすぐにビルドできます。
 
