@@ -13,8 +13,8 @@ The main purpose of this app is to make easier checking what app supports Arm-ba
 How to install
 ---
 
-1. Download notalized app from [GitHub Releases](https://github.com/otofune/unicon/releases)
-2. Copy unicon.app to /Applications
+1. Download app archive from [Latest release](https://github.com/otofune/unicon/releases/latest)
+2. Open dmg and copy unicon.app to /Applications
 3. (Optional) Add to Login Items to start the app automatically when you log in. See https://support.apple.com/guide/mac-help/mtusr003/mac
 
 Of course, you can build it by yourself.

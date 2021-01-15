@@ -10,8 +10,8 @@
 ## インストールするには
 
 
-1. [GitHub Releases](https://github.com/otofune/unicon/releases) からアプリをダウンロードする
-2. unicon.app を /Applications にコピーする
+1. [Latest release](https://github.com/otofune/unicon/releases/latest) からアーカイブをダウンロードする
+2. dmg をマウントして unicon.app を /Applications にコピーする
 4. (Optional) 自動でアプリを起動するために、ログイン項目に追加する。詳しくは https://support.apple.com/guide/mac-help/mtusr003/mac を参照
 
 もちろんビルドすることもできます。
