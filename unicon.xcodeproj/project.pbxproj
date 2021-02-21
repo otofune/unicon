@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7546803625E29A0700862A6D /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 7546803525E29A0700862A6D /* Credits.html */; };
 		EB1553D12564050900CC74D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1553D02564050900CC74D4 /* AppDelegate.swift */; };
 		EB1553D52564050900CC74D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D42564050900CC74D4 /* Assets.xcassets */; };
 		EB1553D82564050900CC74D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB1553D72564050900CC74D4 /* Preview Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7546803525E29A0700862A6D /* Credits.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		EB1553CD2564050800CC74D4 /* unicon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unicon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1553D02564050900CC74D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB1553D42564050900CC74D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				EB1553D62564050900CC74D4 /* Preview Content */,
 				EBE6344C25688D150038A0FE /* CPU.swift */,
 				EB35564C25A255D60054BD06 /* DataExt.swift */,
+				7546803525E29A0700862A6D /* Credits.html */,
 			);
 			path = unicon;
 			sourceTree = "<group>";
@@ -115,7 +118,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = otofune;
 				TargetAttributes = {
 					EB1553CC2564050800CC74D4 = {
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB1553DB2564050900CC74D4 /* Main.storyboard in Resources */,
+				7546803625E29A0700862A6D /* Credits.html in Resources */,
 				EB1553D82564050900CC74D4 /* Preview Assets.xcassets in Resources */,
 				EB1553D52564050900CC74D4 /* Assets.xcassets in Resources */,
 			);
